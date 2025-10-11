@@ -92,6 +92,7 @@ Thank you for your interest in the Soil Quality Assessment Tool! We hope this to
 
 Feel free to customize the repository URL, email address, and contact information to suit your project's needs.
 
+hosting addres is: https://farmer-scheatsheet.vercel.app/
 Owner: Rawllince Onyango Okello
 email: rawllincecj@gmail.com
 contact: +254 726737491
