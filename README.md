@@ -1,73 +1,97 @@
-# Welcome to your Lovable project
+ Soil Quality Assessment Tool
 
-## Project info
+# Table of Contents
+- [Overview]
+- [Features]
+- [Installation]
+- [Usage]
+- [Contributing]
+- [License]
+- [Contact]
 
-**URL**: https://lovable.dev/projects/3c7f4313-a792-4b2b-94ef-c46984bd7529
+## Overview
+The Soil Quality Assessment Tool is designed to assist farmers in assessing soil quality and generating crop recommendations based on specific soil conditions. With an emphasis on sustainable agriculture, this tool aims to improve crop yields and promote soil health through informed decision-making.
 
-## How can I edit this code?
+## Features
+- User-Friendly Input Form: Farmers can easily input parameters such as soil type, moisture level, and organic content.
+- Dynamic Recommendations: Based on user inputs, the tool provides tailored crop recommendations with descriptions and associated graphics.
+- Educational Resources: The tool includes information on soil quality assessments and their significance in sustainable farming.
+- Accessible Contact Mechanism: Users can reach out for support, ask questions, and provide feedback through a straightforward contact form.
 
-There are several ways of editing your application.
+## Installation
+To set up the Soil Quality Assessment Tool locally, follow these steps:
 
-**Use Lovable**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Rawllince/soil-quality-assessment-tool.git
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3c7f4313-a792-4b2b-94ef-c46984bd7529) and start prompting.
+Navigate into the directory:
+cd soil-quality-assessment-tool
 
-Changes made via Lovable will be committed automatically to this repo.
+Install Dependencies:
+Depending on your setup, you may need to install Node.js and npm. Once installed, run:
+npm install
 
-**Use your preferred IDE**
+Start the Development Server:
+npm start
+Open your web browser and visit http://localhost:3000 to view the tool.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Usage
 
-Follow these steps:
+Homepage
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Input Parameters: Users need to fill out the input form with information on soil type, moisture level, and organic content.
 
-# Step 3: Install the necessary dependencies.
-npm i
+Recommendations Area: After submitting the form, the tool dynamically generates crop recommendations based on the inputs provided.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
 
-**Edit a file directly in GitHub**
+About Page
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
 
-**Use GitHub Codespaces**
+This page outlines the project's purpose and the significance of soil assessment in sustainable agriculture.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Users can learn about the objectives of the tool and the team behind it.
 
-## What technologies are used for this project?
 
-This project is built with:
+Contact Page
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
 
-## How can I deploy this project?
+Users can submit their queries via the contact form.
 
-Simply open [Lovable](https://lovable.dev/projects/3c7f4313-a792-4b2b-94ef-c46984bd7529) and click on Share -> Publish.
+There is also a section with FAQs addressing common questions related to soil quality and crop recommendations.
 
-## Can I connect a custom domain to my Lovable project?
 
-Yes, you can!
+Contributing
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Contributions are welcome! If you would like to contribute to this project, please follow these steps:
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Fork the repository.
+
+Create a new branch for your feature or bug fix:
+git checkout -b feature/my-feature
+
+Make your changes and commit them:
+git commit -m 'Add some feature'
+
+Push to the branch:
+git push origin feature/my-feature
+
+Open a pull request.
+
+
+License
+
+This project is not licesed be free to improve and modify it for better results.
+Contact
+
+For further inquiries, please reach out via the contact form on the website or email me at rawllincecj@gmail.com.
+
+Thank you for your interest in the Soil Quality Assessment Tool! We hope this tool helps you make informed decisions for sustainable farming.
+
+Feel free to customize the repository URL, email address, and contact information to suit your project's needs.
+
+Owner: Rawllince Onyango Okello
+email: rawllincecj@gmail.com
+contact: +254 726737491
