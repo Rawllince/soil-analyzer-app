@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar.jsx";
+import Footer from "@/components/Footer.jsx";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -32,13 +32,11 @@ const formSchema = z.object({
   message: z.string().min(10, "Message must be at least 10 characters").max(1000),
 });
 
-type FormData = z.infer<typeof formSchema>;
-
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
 
-  const form = useForm<FormData>({
+  const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -48,17 +46,17 @@ const Contact = () => {
     },
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data) => {
     console.log("Form submitted:", data);
     setSubmitted(true);
-    
+
     toast({
       title: "Message Sent!",
       description: "Thank you for contacting us. We'll get back to you soon.",
     });
 
     form.reset();
-    
+
     setTimeout(() => {
       setSubmitted(false);
     }, 5000);
@@ -94,7 +92,7 @@ const Contact = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      
+
       <main className="flex-1">
         <section className="py-16 md:py-24 bg-gradient-to-b from-muted/30 to-background">
           <div className="container">
@@ -103,7 +101,7 @@ const Contact = () => {
                 Get in <span className="text-primary">Touch</span>
               </h1>
               <p className="text-lg text-muted-foreground">
-                Have questions about soil assessment or need help using our tool? 
+                Have questions about soil assessment or need help using our tool?
                 We're here to support your farming journey.
               </p>
             </div>
@@ -183,7 +181,7 @@ const Contact = () => {
                             <FormItem>
                               <FormLabel>Message *</FormLabel>
                               <FormControl>
-                                <Textarea 
+                                <Textarea
                                   placeholder="Tell us about your soil concerns or questions..."
                                   className="min-h-[150px] resize-none"
                                   {...field}
@@ -207,7 +205,7 @@ const Contact = () => {
               <div className="lg:col-span-1">
                 <Card className="p-6 shadow-card sticky top-20">
                   <h3 className="text-xl font-bold mb-4">Frequently Asked Questions</h3>
-                  
+
                   <Accordion type="single" collapsible className="w-full">
                     {faqs.map((faq, index) => (
                       <AccordionItem key={index} value={`item-${index}`}>
@@ -225,7 +223,7 @@ const Contact = () => {
                 {/* Contact Info */}
                 <Card className="p-6 shadow-card mt-6">
                   <h3 className="text-lg font-bold mb-4">Other Ways to Reach Us</h3>
-                  
+
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
                       <Mail className="h-5 w-5 text-primary mt-0.5" />

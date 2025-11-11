@@ -9,11 +9,11 @@ const Footer = () => {
             <Sprout className="h-5 w-5 text-primary" />
             <span className="text-sm font-semibold text-foreground">SoilCheck</span>
           </div>
-          
+
           <p className="text-sm text-muted-foreground text-center md:text-left">
             Empowering farmers with data-driven soil insights for sustainable agriculture
           </p>
-          
+
           <p className="text-sm text-muted-foreground">
             © 2025 SoilCheck. All rights reserved.
           </p>

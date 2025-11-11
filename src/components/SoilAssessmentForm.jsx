@@ -5,24 +5,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Card } from "@/components/ui/card";
 
-interface FormData {
-  soilType: string;
-  moisture: number;
-  organicContent: number;
-  ph: number;
-}
+const SoilAssessmentForm = ({ onSubmit }) => {
+  const [soilType, setSoilType] = useState("");
+  const [moisture, setMoisture] = useState([50]);
+  const [organicContent, setOrganicContent] = useState([3]);
+  const [ph, setPh] = useState([7]);
 
-interface SoilAssessmentFormProps {
-  onSubmit: (data: FormData) => void;
-}
-
-const SoilAssessmentForm = ({ onSubmit }: SoilAssessmentFormProps) => {
-  const [soilType, setSoilType] = useState<string>("");
-  const [moisture, setMoisture] = useState<number[]>([50]);
-  const [organicContent, setOrganicContent] = useState<number[]>([3]);
-  const [ph, setPh] = useState<number[]>([7]);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (soilType) {
       onSubmit({
@@ -121,8 +110,8 @@ const SoilAssessmentForm = ({ onSubmit }: SoilAssessmentFormProps) => {
           </div>
         </div>
 
-        <Button 
-          type="submit" 
+        <Button
+          type="submit"
           className="w-full"
           disabled={!soilType}
         >

@@ -1,98 +1,228 @@
- Soil Quality Assessment Tool
+# Soil Quality Assessment Tool
 
-# Table of Contents
-- [Overview]
-- [Features]
-- [Installation]
-- [Usage]
-- [Contributing]
-- [License]
-- [Contact]
+A modern web application designed to help farmers assess soil quality and receive personalized crop recommendations based on soil parameters. Built with React, TypeScript, and Tailwind CSS for a responsive and user-friendly experience.
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [API Reference](#api-reference)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ## Overview
-The Soil Quality Assessment Tool is designed to assist farmers in assessing soil quality and generating crop recommendations based on specific soil conditions. With an emphasis on sustainable agriculture, this tool aims to improve crop yields and promote soil health through informed decision-making.
+The Soil Quality Assessment Tool empowers farmers and agricultural professionals to make data-driven decisions about crop selection. By analyzing key soil parameters such as soil type, moisture content, organic matter levels, and pH balance, the application provides scientifically-informed crop recommendations that optimize yield potential and promote sustainable farming practices.
+
+The tool uses an intelligent recommendation algorithm that considers multiple soil factors simultaneously to suggest the most suitable crops for specific conditions, helping users maximize productivity while maintaining soil health.
 
 ## Features
-- User-Friendly Input Form: Farmers can easily input parameters such as soil type, moisture level, and organic content.
-- Dynamic Recommendations: Based on user inputs, the tool provides tailored crop recommendations with descriptions and associated graphics.
-- Educational Resources: The tool includes information on soil quality assessments and their significance in sustainable farming.
-- Accessible Contact Mechanism: Users can reach out for support, ask questions, and provide feedback through a straightforward contact form.
+- **Interactive Soil Assessment Form**: Easy-to-use interface for inputting soil parameters including:
+  - Soil type selection (Clay, Sandy, Loam, Silt, Peat, Chalky)
+  - Moisture level slider (0-100%)
+  - Organic content percentage (0-10%)
+  - pH level range (4-10)
+- **Intelligent Crop Recommendations**: Dynamic algorithm that analyzes all input parameters to provide personalized crop suggestions
+- **Detailed Crop Information**: Each recommendation includes:
+  - Crop description and growing requirements
+  - Suitability rating (Excellent/Good/Fair)
+  - Key benefits and advantages
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Educational Content**: Information about sustainable agriculture and soil health
+- **Contact Support**: Direct communication channel for questions and feedback
+
+## Technology Stack
+- **Frontend Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS with custom components
+- **UI Components**: Radix UI (Headless UI primitives)
+- **Form Handling**: React Hook Form with Zod validation
+- **Routing**: React Router DOM
+- **Icons**: Lucide React
+- **Charts**: Recharts (for future analytics features)
+- **Package Manager**: Bun
+- **Deployment**: Vercel
 
 ## Installation
-To set up the Soil Quality Assessment Tool locally, follow these steps:
 
-1. Clone the repository:
+### Prerequisites
+- Node.js (version 18 or higher)
+- Bun package manager (recommended) or npm
+
+### Setup Steps
+
+1. **Clone the repository**
    ```bash
    git clone https://github.com/Rawllince/soil-quality-assessment-tool.git
+   cd soil-quality-assessment-tool
+   ```
 
-Navigate into the directory:
-cd soil-quality-assessment-tool
+2. **Install dependencies**
+   ```bash
+   # Using Bun (recommended)
+   bun install
 
-Install Dependencies:
-Depending on your setup, you may need to install Node.js and npm. Once installed, run:
-npm install
+   # Or using npm
+   npm install
+   ```
 
-Start the Development Server:
-npm start
-Open your web browser and visit http://localhost:3000 to view the tool.
+3. **Start the development server**
+   ```bash
+   # Using Bun
+   bun run dev
 
+   # Or using npm
+   npm run dev
+   ```
 
-Usage
+4. **Open your browser**
+   Navigate to `http://localhost:8080` to view the application.
 
-Homepage
+### Build for Production
+```bash
+# Using Bun
+bun run build
 
+# Or using npm
+npm run build
+```
 
-Input Parameters: Users need to fill out the input form with information on soil type, moisture level, and organic content.
+## Usage
 
-Recommendations Area: After submitting the form, the tool dynamically generates crop recommendations based on the inputs provided.
+### Getting Started
+1. Navigate to the homepage of the application
+2. Fill out the soil assessment form with your soil parameters:
+   - **Soil Type**: Select from available options (Clay, Sandy, Loam, Silt, Peat, Chalky)
+   - **Moisture Level**: Use the slider to indicate soil moisture percentage
+   - **Organic Content**: Set the organic matter percentage in your soil
+   - **pH Level**: Adjust the pH slider to match your soil's acidity/alkalinity
 
+3. Click "Get Crop Recommendations" to receive personalized suggestions
 
-About Page
+### Understanding Recommendations
+The tool analyzes your inputs against a comprehensive crop database and returns up to 6 recommended crops, ranked by suitability:
+- **Excellent**: Optimal conditions for maximum yield
+- **Good**: Suitable conditions with good potential
+- **Fair**: Acceptable conditions but may require additional management
 
+Each recommendation includes:
+- Detailed description of growing requirements
+- Key benefits and advantages
+- Suitability rating
 
-This page outlines the project's purpose and the significance of soil assessment in sustainable agriculture.
+### Navigation
+- **Home**: Main assessment form and results
+- **About**: Learn about the project and sustainable agriculture
+- **Contact**: Get support and provide feedback
 
-Users can learn about the objectives of the tool and the team behind it.
+## Project Structure
+```
+soil-analyzer-app/
+├── public/
+│   ├── placeholder.svg
+│   └── robots.txt
+├── src/
+│   ├── components/
+│   │   ├── ui/           # Reusable UI components (shadcn/ui)
+│   │   ├── CropRecommendations.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Navbar.jsx
+│   │   └── SoilAssessmentForm.jsx
+│   ├── hooks/
+│   │   ├── use-mobile.jsx
+│   │   └── use-toast.ts
+│   ├── lib/
+│   │   └── utils.ts
+│   ├── pages/
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Index.jsx
+│   │   └── NotFound.jsx
+│   ├── utils/
+│   │   └── cropRecommendations.ts
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── package.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.js
+└── README.md
+```
 
+## API Reference
 
-Contact Page
+### Crop Recommendation Algorithm
 
+The core recommendation engine uses the following logic:
 
-Users can submit their queries via the contact form.
+**Input Parameters:**
+- `soilType`: String (clay | sandy | loam | silt | peat | chalky)
+- `moisture`: Number (0-100)
+- `organicContent`: Number (0-10)
+- `ph`: Number (4-10)
 
-There is also a section with FAQs addressing common questions related to soil quality and crop recommendations.
+**Output:**
+Array of crop objects with:
+- `name`: String
+- `description`: String
+- `suitability`: "excellent" | "good" | "fair"
+- `benefits`: String[]
 
+**Supported Crops:**
+- Wheat, Corn (Maize), Rice, Potatoes, Soybeans
+- Barley, Cotton, Carrots, Lettuce, Sunflowers
+- Tomatoes, Alfalfa
 
-Contributing
+Each crop has specific soil requirements that are evaluated against user inputs.
 
-Contributions are welcome! If you would like to contribute to this project, please follow these steps:
+## Contributing
 
-Fork the repository.
+We welcome contributions from the community! Here's how you can help:
 
-Create a new branch for your feature or bug fix:
-git checkout -b feature/my-feature
+### Development Setup
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/your-feature-name`
+3. Make your changes
+4. Run tests: `npm run lint`
+5. Commit your changes: `git commit -m 'Add some feature'`
+6. Push to the branch: `git push origin feature/your-feature-name`
+7. Open a Pull Request
 
-Make your changes and commit them:
-git commit -m 'Add some feature'
+### Guidelines
+- Follow the existing code style and TypeScript conventions
+- Add tests for new features
+- Update documentation as needed
+- Ensure responsive design works across devices
 
-Push to the branch:
-git push origin feature/my-feature
+### Areas for Contribution
+- Additional crop recommendations
+- Enhanced algorithm accuracy
+- New UI features
+- Performance optimizations
+- Accessibility improvements
 
-Open a pull request.
+## License
 
+This project is open source and available under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code for educational and commercial purposes.
 
-License
+## Contact
 
-This project is not licesed be free to improve and modify it for better results.
-Contact
+**Project Owner:** Rawllince Onyango Okello
 
-For further inquiries, please reach out via the contact form on the website or email me at rawllincecj@gmail.com.
+- **Email:** rawllincecj@gmail.com
+- **Phone:** +254 726 737 491
+- **Live Demo:** [https://farmer-scheatsheet.vercel.app/](https://farmer-scheatsheet.vercel.app/)
 
-Thank you for your interest in the Soil Quality Assessment Tool! We hope this tool helps you make informed decisions for sustainable farming.
+For support, questions, or feedback:
+- Use the contact form within the application
+- Email directly for technical inquiries
+- Open an issue on GitHub for bug reports
 
-Feel free to customize the repository URL, email address, and contact information to suit your project's needs.
+---
 
-hosting addres is: https://farmer-scheatsheet.vercel.app/
-Owner: Rawllince Onyango Okello
-email: rawllincecj@gmail.com
-contact: +254 726737491
+**Thank you for using the Soil Quality Assessment Tool!** We hope this application helps you make informed decisions for sustainable and productive farming.

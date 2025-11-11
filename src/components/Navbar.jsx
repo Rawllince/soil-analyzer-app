@@ -3,9 +3,9 @@ import { Sprout } from "lucide-react";
 
 const Navbar = () => {
   const location = useLocation();
-  
-  const isActive = (path: string) => location.pathname === path;
-  
+
+  const isActive = (path) => location.pathname === path;
+
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
@@ -13,7 +13,7 @@ const Navbar = () => {
           <Sprout className="h-7 w-7 text-primary" />
           <span className="text-xl font-bold text-foreground">SoilCheck</span>
         </Link>
-        
+
         <div className="flex items-center space-x-1">
           <Link
             to="/"

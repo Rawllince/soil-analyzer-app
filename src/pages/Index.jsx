@@ -1,23 +1,16 @@
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import SoilAssessmentForm from "@/components/SoilAssessmentForm";
-import CropRecommendations from "@/components/CropRecommendations";
+import Navbar from "@/components/Navbar.jsx";
+import Footer from "@/components/Footer.jsx";
+import SoilAssessmentForm from "@/components/SoilAssessmentForm.jsx";
+import CropRecommendations from "@/components/CropRecommendations.jsx";
 import { getCropRecommendations } from "@/utils/cropRecommendations";
 import { Sprout, TrendingUp, Droplets, Leaf } from "lucide-react";
 
-interface FormData {
-  soilType: string;
-  moisture: number;
-  organicContent: number;
-  ph: number;
-}
-
 const Index = () => {
-  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [recommendations, setRecommendations] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const handleFormSubmit = (data: FormData) => {
+  const handleFormSubmit = (data) => {
     const crops = getCropRecommendations(data);
     setRecommendations(crops);
     setHasSubmitted(true);
@@ -26,7 +19,7 @@ const Index = () => {
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
-      
+
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative py-16 md:py-24 bg-gradient-to-b from-muted/30 to-background">
@@ -36,13 +29,13 @@ const Index = () => {
                 <Sprout className="h-5 w-5 text-accent" />
                 <span className="text-sm font-medium text-accent">Smart Agriculture Technology</span>
               </div>
-              
+
               <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
                 Soil Quality <span className="text-primary">Assessment Tool</span>
               </h1>
-              
+
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Make data-driven decisions for your farm. Our advanced assessment tool analyzes your soil conditions 
+                Make data-driven decisions for your farm. Our advanced assessment tool analyzes your soil conditions
                 and provides personalized crop recommendations to maximize yields and promote sustainable farming practices.
               </p>
             </div>
@@ -86,7 +79,7 @@ const Index = () => {
                   Enter your soil parameters below to receive personalized crop recommendations
                 </p>
               </div>
-              
+
               <SoilAssessmentForm onSubmit={handleFormSubmit} />
             </div>
           </div>
@@ -102,7 +95,7 @@ const Index = () => {
                 ) : (
                   <div className="text-center py-12">
                     <p className="text-lg text-muted-foreground">
-                      No specific recommendations available for these soil conditions. 
+                      No specific recommendations available for these soil conditions.
                       Try adjusting your parameters or consult with a local agricultural extension office.
                     </p>
                   </div>

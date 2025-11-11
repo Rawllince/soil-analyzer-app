@@ -2,19 +2,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2 } from "lucide-react";
 
-interface Crop {
-  name: string;
-  description: string;
-  suitability: "excellent" | "good" | "fair";
-  benefits: string[];
-}
-
-interface CropRecommendationsProps {
-  crops: Crop[];
-}
-
-const CropRecommendations = ({ crops }: CropRecommendationsProps) => {
-  const getSuitabilityColor = (suitability: string) => {
+const CropRecommendations = ({ crops }) => {
+  const getSuitabilityColor = (suitability) => {
     switch (suitability) {
       case "excellent":
         return "bg-accent text-accent-foreground";
@@ -33,11 +22,11 @@ const CropRecommendations = ({ crops }: CropRecommendationsProps) => {
         <CheckCircle2 className="h-6 w-6 text-accent" />
         <h2 className="text-2xl font-bold">Recommended Crops for Your Soil</h2>
       </div>
-      
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {crops.map((crop, index) => (
-          <Card 
-            key={index} 
+          <Card
+            key={index}
             className="p-5 hover:shadow-card transition-shadow duration-300"
           >
             <div className="space-y-3">
@@ -47,11 +36,11 @@ const CropRecommendations = ({ crops }: CropRecommendationsProps) => {
                   {crop.suitability}
                 </Badge>
               </div>
-              
+
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {crop.description}
               </p>
-              
+
               <div className="space-y-2 pt-2">
                 <p className="text-xs font-semibold text-foreground uppercase tracking-wide">
                   Key Benefits:
