@@ -11,6 +11,8 @@ import { Badge } from "@/components/ui/badge";
 
 const profileSchema = z.object({
   email: z.string().email("Invalid email address"),
+  name: z.string().min(1, "Name is required"),
+  location: z.string().optional(),
 });
 
 const Profile = () => {
@@ -47,7 +49,9 @@ const Profile = () => {
       if (response.ok) {
         const userData = await response.json();
         setUser(userData);
+        setValue("name", userData.name || "");
         setValue("email", userData.email);
+        setValue("location", userData.location || "");
       } else {
         setError("Failed to load profile");
       }
@@ -124,11 +128,26 @@ const Profile = () => {
         {/* Profile Section */}
         <Card>
           <CardHeader>
-            <CardTitle>Profile Settings</CardTitle>
-            <CardDescription>Update your account information</CardDescription>
+            <CardTitle>My Account</CardTitle>
+            <CardDescription>
+              Welcome back{user?.name ? `, ${user.name}` : ''}! Update your account information and view your analysis history.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Full Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  placeholder="Enter your full name"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <p className="text-sm text-red-600">{errors.name.message}</p>
+                )}
+              </div>
+
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -138,6 +157,19 @@ const Profile = () => {
                 />
                 {errors.email && (
                   <p className="text-sm text-red-600">{errors.email.message}</p>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="location">Location</Label>
+                <Input
+                  id="location"
+                  type="text"
+                  placeholder="Enter your location (optional)"
+                  {...register("location")}
+                />
+                {errors.location && (
+                  <p className="text-sm text-red-600">{errors.location.message}</p>
                 )}
               </div>
 

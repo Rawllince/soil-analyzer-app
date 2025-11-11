@@ -40,6 +40,8 @@ const SoilAssessment = mongoose.model('SoilAssessment', soilAssessmentSchema);
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  name: { type: String, default: '' },
+  location: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now }
 });
 
@@ -204,8 +206,8 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
 
 app.put('/api/profile', authenticateToken, async (req, res) => {
   try {
-    const { email } = req.body;
-    const user = await User.findByIdAndUpdate(req.user.id, { email }, { new: true }).select('-password');
+    const { email, name, location } = req.body;
+    const user = await User.findByIdAndUpdate(req.user.id, { email, name, location }, { new: true }).select('-password');
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });

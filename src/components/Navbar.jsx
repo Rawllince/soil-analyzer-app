@@ -62,7 +62,7 @@ const Navbar = () => {
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
-                Profile
+                My Account
               </Link>
               <Button
                 onClick={handleLogout}
