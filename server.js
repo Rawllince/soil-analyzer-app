@@ -20,6 +20,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/soil-anal
 
 // Models
 const soilAssessmentSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   soilType: String,
   moisture: Number,
   organicContent: Number,
@@ -44,8 +45,22 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+// Middleware to verify JWT
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) return res.status(401).json({ error: 'Access token required' });
+
+  jwt.verify(token, process.env.JWT_SECRET || 'secret', (err, user) => {
+    if (err) return res.status(403).json({ error: 'Invalid token' });
+    req.user = user;
+    next();
+  });
+};
+
 // Routes
-app.post('/api/assessments', async (req, res) => {
+app.post('/api/assessments', authenticateToken, async (req, res) => {
   try {
     const { soilType, moisture, organicContent, ph } = req.body;
 
@@ -53,6 +68,7 @@ app.post('/api/assessments', async (req, res) => {
     const recommendations = getCropRecommendations({ soilType, moisture, organicContent, ph });
 
     const assessment = new SoilAssessment({
+      userId: req.user.id,
       soilType,
       moisture,
       organicContent,
@@ -67,9 +83,9 @@ app.post('/api/assessments', async (req, res) => {
   }
 });
 
-app.get('/api/assessments', async (req, res) => {
+app.get('/api/assessments', authenticateToken, async (req, res) => {
   try {
-    const assessments = await SoilAssessment.find().sort({ createdAt: -1 }).limit(10);
+    const assessments = await SoilAssessment.find({ userId: req.user.id }).sort({ createdAt: -1 });
     res.json(assessments);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -171,6 +187,26 @@ app.post('/api/login', async (req, res) => {
     if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || 'secret', { expiresIn: '1h' });
     res.json({ token });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Profile routes
+app.get('/api/profile', authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/api/profile', authenticateToken, async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findByIdAndUpdate(req.user.id, { email }, { new: true }).select('-password');
+    res.json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

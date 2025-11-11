@@ -5,18 +5,24 @@ import SoilAssessmentForm from "@/components/SoilAssessmentForm.jsx";
 import CropRecommendations from "@/components/CropRecommendations.jsx";
 import { useMutation } from "@tanstack/react-query";
 import { Sprout, TrendingUp, Droplets, Leaf } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const { user } = useAuth();
 
   const submitAssessment = useMutation({
     mutationFn: async (data) => {
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      if (user) {
+        headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+      }
       const response = await fetch('http://localhost:5000/api/assessments', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify(data),
       });
       if (!response.ok) {
