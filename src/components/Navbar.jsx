@@ -45,6 +45,26 @@ const Navbar = () => {
           >
             Contact
           </Link>
+          <Link
+            to="/login"
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              isActive("/login")
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+            }`}
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+              isActive("/signup")
+                ? "bg-primary text-primary-foreground"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted"
+            }`}
+          >
+            Signup
+          </Link>
         </div>
       </div>
     </nav>
