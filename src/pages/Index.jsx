@@ -3,17 +3,35 @@ import Navbar from "@/components/Navbar.jsx";
 import Footer from "@/components/Footer.jsx";
 import SoilAssessmentForm from "@/components/SoilAssessmentForm.jsx";
 import CropRecommendations from "@/components/CropRecommendations.jsx";
-import { getCropRecommendations } from "@/utils/cropRecommendations";
+import { useMutation } from "@tanstack/react-query";
 import { Sprout, TrendingUp, Droplets, Leaf } from "lucide-react";
 
 const Index = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
+  const submitAssessment = useMutation({
+    mutationFn: async (data) => {
+      const response = await fetch('http://localhost:5000/api/assessments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to submit assessment');
+      }
+      return response.json();
+    },
+    onSuccess: (data) => {
+      setRecommendations(data.recommendations);
+      setHasSubmitted(true);
+    },
+  });
+
   const handleFormSubmit = (data) => {
-    const crops = getCropRecommendations(data);
-    setRecommendations(crops);
-    setHasSubmitted(true);
+    submitAssessment.mutate(data);
   };
 
   return (
@@ -80,7 +98,11 @@ const Index = () => {
                 </p>
               </div>
 
-              <SoilAssessmentForm onSubmit={handleFormSubmit} />
+              <SoilAssessmentForm
+                onSubmit={handleFormSubmit}
+                isLoading={submitAssessment.isPending}
+                error={submitAssessment.error}
+              />
             </div>
           </div>
         </section>

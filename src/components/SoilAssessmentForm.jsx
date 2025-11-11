@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Card } from "@/components/ui/card";
 
-const SoilAssessmentForm = ({ onSubmit }) => {
+const SoilAssessmentForm = ({ onSubmit, isLoading, error }) => {
   const [soilType, setSoilType] = useState("");
   const [moisture, setMoisture] = useState([50]);
   const [organicContent, setOrganicContent] = useState([3]);
@@ -25,6 +25,11 @@ const SoilAssessmentForm = ({ onSubmit }) => {
 
   return (
     <Card className="p-6 shadow-card">
+      {error && (
+        <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md">
+          <p className="text-sm text-destructive">{error.message}</p>
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
           <Label htmlFor="soilType" className="text-base font-semibold">
@@ -113,9 +118,9 @@ const SoilAssessmentForm = ({ onSubmit }) => {
         <Button
           type="submit"
           className="w-full"
-          disabled={!soilType}
+          disabled={!soilType || isLoading}
         >
-          Get Crop Recommendations
+          {isLoading ? "Analyzing..." : "Get Crop Recommendations"}
         </Button>
       </form>
     </Card>
